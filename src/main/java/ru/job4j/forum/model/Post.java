@@ -14,6 +14,9 @@ public class Post {
     private String description;
     private Calendar created;
 
+    public Post() {
+    }
+
     public static Post of(String name) {
         Post post = new Post();
         post.name = name;
