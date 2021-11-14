@@ -1,2 +1,3 @@
+[![Build Status](https://app.travis-ci.com/ikioresko/job4j_forum.svg?branch=master)](https://app.travis-ci.com/ikioresko/job4j_forum)
 
-Repository for job4j_forum tasks
+This repository for job4j_forum tasks
