@@ -28,14 +28,13 @@ public class RegControl {
         if (users.findUserByUsername(user.getUsername()) != null) {
             model.addAttribute("errorMessage", "Username already exist !!");
             return "reg";
-        } else {
-            user.setEnabled(true);
-            user.setPassword(encoder.encode(user.getPassword()));
-            user.setAuthority(authorities.findByAuthority("ROLE_USER"));
-            users.save(user);
-            model.addAttribute("errorMessage", "Registration completed !!");
-            return "login";
         }
+        user.setEnabled(true);
+        user.setPassword(encoder.encode(user.getPassword()));
+        user.setAuthority(authorities.findByAuthority("ROLE_USER"));
+        users.save(user);
+        model.addAttribute("errorMessage", "Registration completed !!");
+        return "login";
     }
 
     @GetMapping("/reg")
