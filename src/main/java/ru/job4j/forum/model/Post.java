@@ -1,13 +1,17 @@
 package ru.job4j.forum.model;
 
 import java.util.Calendar;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 public class Post {
     private int id;
     private String name;
     private String description;
     private Calendar created;
+    private User author;
+    private Set<Message> messages = new HashSet<>();
 
     public static Post of(String name) {
         Post post = new Post();
@@ -25,6 +29,22 @@ public class Post {
 
     public String getName() {
         return name;
+    }
+
+    public Set<Message> getMessages() {
+        return messages;
+    }
+
+    public User getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(User author) {
+        this.author = author;
+    }
+
+    public void setMessages(Set<Message> messages) {
+        this.messages = messages;
     }
 
     public void setName(String name) {
@@ -71,6 +91,8 @@ public class Post {
                 + ", name='" + name + '\''
                 + ", description='" + description + '\''
                 + ", created=" + created
+                + ", author=" + author
+                + ", messages=" + messages
                 + '}';
     }
 }

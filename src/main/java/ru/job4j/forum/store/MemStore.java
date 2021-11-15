@@ -1,6 +1,7 @@
 package ru.job4j.forum.store;
 
 import org.springframework.stereotype.Repository;
+import ru.job4j.forum.model.Message;
 import ru.job4j.forum.model.Post;
 import ru.job4j.forum.model.User;
 
@@ -11,7 +12,9 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class MemStore implements Store {
     private final Map<Integer, Post> postStore = new HashMap<>();
     private final Map<Integer, User> userStore = new HashMap<>();
+    private final Map<Integer, Message> messageStore = new HashMap<>();
     private final AtomicInteger postId = new AtomicInteger(1);
+    private final AtomicInteger messageId = new AtomicInteger(0);
 
     public MemStore() {
         Post post = new Post();
@@ -50,5 +53,19 @@ public class MemStore implements Store {
     @Override
     public Post findPostById(int id) {
         return postStore.get(id);
+    }
+
+    @Override
+    public Message addMessage(int postId, Message message) {
+        message.setPostId(postId);
+        int id = messageId.incrementAndGet();
+        message.setId(id);
+        messageStore.put(id, message);
+        return message;
+    }
+
+    @Override
+    public List<Message> findMessagesByPostId(int postId) {
+        return new ArrayList<>(messageStore.values());
     }
 }

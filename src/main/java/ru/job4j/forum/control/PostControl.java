@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import ru.job4j.forum.model.Message;
 import ru.job4j.forum.model.Post;
 import ru.job4j.forum.service.PostService;
 
@@ -32,5 +33,19 @@ public class PostControl {
     public String edit(@RequestParam("id") int id, Model model) {
         model.addAttribute("post", service.getPostById(id));
         return "forum/edit";
+    }
+
+    @GetMapping("/discussion")
+    public String discussion(@RequestParam("id") int id, Model model) {
+        model.addAttribute("post", service.getPostById(id));
+        model.addAttribute("messages", service.findMessagesByPostId(id));
+        return "post";
+    }
+
+    @PostMapping("/createMsg")
+    public String createMsg(@ModelAttribute Message message,
+                            @RequestParam("id") int postId) {
+        service.addMessage(postId, message);
+        return "redirect:/discussion?id=" + postId;
     }
 }
