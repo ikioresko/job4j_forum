@@ -36,7 +36,7 @@
             <tbody>
             <c:forEach items="${posts}" var="post">
                 <tr>
-                    <td><c:out value="${post.name}"/></td>
+                    <td><a href='<c:url value="/discussion?id=${post.id}"/>'>${post.name}</a></td>
                     <td><c:out value="${post.description}"/></td>
                     <td><c:out value="${post.created.getTime()}"/></td>
                     <td><a href="<c:url value='/edit?id=${post.id}'/>">Редактировать пост</a></td>
