@@ -15,7 +15,10 @@ public class Post {
     private String name;
     private String description;
     private Calendar created;
+    @ManyToOne
+    @JoinColumn(name = "author_id")
     private User author;
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private Set<Message> messages = new HashSet<>();
 
     public Post() {

@@ -11,7 +11,6 @@ public class User {
     private int id;
     private String username;
     private String password;
-
     @ManyToOne
     @JoinColumn(name = "authority_id")
     private Authority authority;
