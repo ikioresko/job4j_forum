@@ -40,7 +40,7 @@ public class ControlTest {
 
     @Test
     @WithMockUser
-    public void createShouldReturnDefaultMessage() throws Exception {
+    public void createPostShouldReturnDefaultMessage() throws Exception {
         this.mockMvc.perform(get("/create"))
                 .andDo(print())
                 .andExpect(status().isOk())
