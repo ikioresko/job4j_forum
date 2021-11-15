@@ -1,17 +1,25 @@
 package ru.job4j.forum.model;
 
+import javax.persistence.*;
 import java.util.Calendar;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
+@Entity
+@Table(name = "posts")
 public class Post {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String name;
     private String description;
     private Calendar created;
     private User author;
     private Set<Message> messages = new HashSet<>();
+
+    public Post() {
+    }
 
     public static Post of(String name) {
         Post post = new Post();
