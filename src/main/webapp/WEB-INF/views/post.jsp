@@ -34,14 +34,13 @@
             </thead>
             <tbody>
                 <tr>
-                    <td>${post.author.name}</td>
+                    <td>${post.author.username}</td>
                     <td>${post.description}</td>
                     <td>${post.created.getTime()}</td>
                 </tr>
-
                 <c:forEach items="${messages}" var="message">
                     <tr>
-                        <td><c:out value="${message.author.name}"/></td>
+                        <td><c:out value="${message.author.username}"/></td>
                         <td><c:out value="${message.text}"/></td>
                         <td><c:out value="${message.created.getTime()}"/></td>
                     </tr>

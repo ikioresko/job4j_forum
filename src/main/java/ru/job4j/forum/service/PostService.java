@@ -36,18 +36,24 @@ public class PostService {
         return (List<User>) userStore.findAll();
     }
 
-    public Message addMessage(int postId, Message message) {
-        message.setPostId(postId);
+    public Message addMessage(Message message, String username) {
+        message.setAuthor(getUserByName(username));
+        message.setCreated(Calendar.getInstance());
         return messageStore.save(message);
     }
 
-    public Message findMessagesByPostId(int postId) {
+    public List<Message> findMessagesByPostId(int postId) {
         return messageStore.findMessageByPostId(postId);
     }
 
-    public Post addPost(Post post) {
+    public Post addPost(Post post, String username) {
+        post.setAuthor(getUserByName(username));
         post.setCreated(Calendar.getInstance());
         return store.save(post);
+    }
+
+    private User getUserByName(String name) {
+        return userStore.findUserByUsername(name);
     }
 
     public Post getPostById(int id) {

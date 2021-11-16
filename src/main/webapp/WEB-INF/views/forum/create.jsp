@@ -16,6 +16,10 @@
     <title>Форум job4j</title>
 </head>
 <body>
+<div>
+    Создать пост
+</div>
+<br>
 <form action="<c:url value='/save'/>" method='POST'>
     <table>
         <tr>

@@ -77,7 +77,6 @@ public class Message {
     public String toString() {
         return "Message{"
                 + "id=" + id
-                + ", postId=" + postId
                 + ", text='" + text + '\''
                 + ", author='" + author + '\''
                 + '}';

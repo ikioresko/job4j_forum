@@ -1,5 +1,6 @@
 package ru.job4j.forum.control;
 
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -8,6 +9,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import ru.job4j.forum.model.Message;
 import ru.job4j.forum.model.Post;
+import ru.job4j.forum.model.User;
 import ru.job4j.forum.service.PostService;
 
 @Controller
@@ -25,7 +27,8 @@ public class PostControl {
 
     @PostMapping("/save")
     public String save(@ModelAttribute Post post) {
-        service.addPost(post);
+        String username = SecurityContextHolder.getContext().getAuthentication().getName();
+        service.addPost(post, username);
         return "redirect:/";
     }
 
@@ -37,6 +40,8 @@ public class PostControl {
 
     @GetMapping("/discussion")
     public String discussion(@RequestParam("id") int id, Model model) {
+        model.addAttribute("user", SecurityContextHolder
+                .getContext().getAuthentication().getPrincipal());
         model.addAttribute("post", service.getPostById(id));
         model.addAttribute("messages", service.findMessagesByPostId(id));
         return "post";
@@ -45,7 +50,9 @@ public class PostControl {
     @PostMapping("/createMsg")
     public String createMsg(@ModelAttribute Message message,
                             @RequestParam("id") int postId) {
-        service.addMessage(postId, message);
+        message.setId(0);
+        message.setPostId(postId);
+        service.addMessage(message, SecurityContextHolder.getContext().getAuthentication().getName());
         return "redirect:/discussion?id=" + postId;
     }
 }

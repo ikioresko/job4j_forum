@@ -18,3 +18,16 @@ create table posts_messages (
  post_id INT references posts(id),
  messages_id INT references messages(id)
 );
+
+create table users (
+ id serial primary key,
+ username varchar(200),
+ password varchar(200),
+ authority_id INT,
+ enabled boolean default true
+);
+
+create table authorities (
+ id serial primary key,
+ authority varchar(50)
+);

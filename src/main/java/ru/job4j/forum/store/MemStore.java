@@ -57,7 +57,6 @@ public class MemStore implements Store {
 
     @Override
     public Message addMessage(int postId, Message message) {
-        message.setPostId(postId);
         int id = messageId.incrementAndGet();
         message.setId(id);
         messageStore.put(id, message);

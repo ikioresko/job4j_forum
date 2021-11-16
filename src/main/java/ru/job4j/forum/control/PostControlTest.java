@@ -16,6 +16,7 @@ import ru.job4j.forum.service.PostService;
 
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.verify;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
@@ -39,7 +40,7 @@ public class PostControlTest {
                 .andDo(print())
                 .andExpect(status().is3xxRedirection());
         ArgumentCaptor<Post> argument = ArgumentCaptor.forClass(Post.class);
-        verify(posts).addPost(argument.capture());
+        verify(posts).addPost(argument.capture(), eq("user"));
         assertThat(argument.getValue().getName(), is("Куплю ладу-гранту. Дорого."));
     }
 
