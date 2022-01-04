@@ -14,6 +14,7 @@ import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import ru.job4j.forum.Main;
 
+import javax.transaction.Transactional;
 @SpringBootTest(classes = Main.class)
 @AutoConfigureMockMvc
 public class ControlTest {
@@ -23,6 +24,7 @@ public class ControlTest {
 
     @Test
     @WithMockUser
+    @Transactional
     public void indexShouldReturnDefaultMessage() throws Exception {
         this.mockMvc.perform(get("/"))
                 .andDo(print())
